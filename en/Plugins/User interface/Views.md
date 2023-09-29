@@ -60,21 +60,20 @@ export default class ExamplePlugin extends Plugin {
     });
   }
 
-  async onunload() {
-  }
 
-  async activateView() {
-    this.app.workspace.detachLeavesOfType(VIEW_TYPE_EXAMPLE);
-
-    await this.app.workspace.getRightLeaf(false).setViewState({
-      type: VIEW_TYPE_EXAMPLE,
-      active: true,
-    });
-
-    this.app.workspace.revealLeaf(
-      this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
-    );
-  }
+  async activateView() {  
+    const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE);  
+    if(leaves.length === 0) {  
+       await this.app.workspace.getRightLeaf(false).setViewState({  
+          type: VIEW_TYPE_EXAMPLE,  
+          active: true,  
+       });  
+    }  
+  
+    this.app.workspace.revealLeaf(  
+       this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]  
+    );  
+}
 }
 ```
 
@@ -91,18 +90,14 @@ The second argument to [[registerView|registerView()]] is a factory function tha
 > });
 > ```
 
-In the `onunload()` method, to make sure that you clean up the view whenever the plugin is disabled:
 
-- Allow the view clean up after itself by calling `close()`.
-- Detach all leaves that are using the view.
+After you've registered a custom view for the plugin, you should give the user a way to activate it. The `activateView()` function is a convenient method that does three things:
 
-After you've registered a custom view for the plugin, you should to give the user a way to activate it. The `activateView()` is a convenient method that does three things:
-
-- Detaches all leaves with the custom view.
+- 
 - Adds the custom view on the right leaf.
 - Reveals the leaf that contains the custom view.
 
 > [!tip]
-> The `activateView()` restricts your plugin to at most one leaf at a time. Try commenting out the call to `detachLeavesOfType()` to allow the user to create more than one leaf. One for every call to `activateView()`.
+> The condition in `activateView()` restricts your plugin to at most one leaf at a time. Try to change the condition to allow the user to create more than one leaf.
 
 How you want the user to activate the custom view is up to you. The example uses a [[Ribbon actions|ribbon action]], but you can also use a [[Commands|command]].
