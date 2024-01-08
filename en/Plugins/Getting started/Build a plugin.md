@@ -104,13 +104,7 @@ To let the user interact with your plugin, add a _ribbon icon_ that greets the u
 
 1. Open `main.ts` in your code editor.
 2. Rename the plugin class from `MyPlugin` to `HelloWorldPlugin`.
-3. Import `Notice` from the `obsidian` package.
-
-   ```ts
-   import { Notice, Plugin } from 'obsidian';
-   ```
-
-4. In the `onload()` method, add the following code:
+3. In the `onload()` method, add the following code:
 
    ```ts
    this.addRibbonIcon('dice', 'Greet', () => {
@@ -118,11 +112,11 @@ To let the user interact with your plugin, add a _ribbon icon_ that greets the u
    });
    ```
 
-5. In the **Command palette**, select **Reload app without saving** to reload the plugin.
+4. In the **Command palette**, select **Reload app without saving** to reload the plugin.
 
 You can now see a dice icon in the ribbon on the left side of the Obsidian window. Select it to display a message in the upper-right corner.
 
-Remember, you need to **reload your plugin after changing the source code**, either by disabling it then enabling it again in the community plugins panel, or using the command palette as detailed in part 5 of this step.  
+Remember, you need to **reload your plugin after changing the source code**, either by disabling it then enabling it again in the community plugins panel, or using the command palette as detailed in part 4 of this step.  
 
 > [!tip] Hot reloading
 > Install the [Hot-Reload](https://github.com/pjeby/hot-reload) plugin to automatically reload your plugin while developing.
