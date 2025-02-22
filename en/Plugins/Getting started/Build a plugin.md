@@ -100,21 +100,21 @@ Remember to restart Obsidian whenever you make changes to `manifest.json`.
 
 ## Step 5: Update the source code
 
-To let the user interact with your plugin, add a _ribbon icon_ that greets the user when they select it.
+To let the user interact with your plugin, a _ribbon icon_ is added that greets the user when they select it. In this step, you'll updated the ribbon's icon by [browsing the available icons](Plugins/User+interface/Icons#Browse+available+icons).
 
 1. Open `main.ts` in your code editor.
 2. Rename the plugin class from `MyPlugin` to `HelloWorldPlugin`.
-3. In the `onload()` method, add the following code:
+3. In the `onload()` method, find the following code:
 
    ```ts
-   this.addRibbonIcon('dice', 'Greet', () => {
-     new Notice('Hello, world!');
-   });
+   const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
    ```
+
+   and replace `dice` with `info`.
 
 4. In the **Command palette**, select **Reload app without saving** to reload the plugin.
 
-You can now see a dice icon in the ribbon on the left side of the Obsidian window. Select it to display a message in the upper-right corner.
+You can now see an info icon in the ribbon on the left side of the Obsidian window. Select it to display a message in the upper-right corner.
 
 Remember, you need to **reload your plugin after changing the source code**, either by disabling it then enabling it again in the community plugins panel, or using the command palette as detailed in part 4 of this step.  
 
